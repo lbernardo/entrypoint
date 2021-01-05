@@ -12,6 +12,7 @@ func NewRequestByApiGateway(req RequestApiGateway) Request {
 	return Request{
 		Body: req.Body,
 		Headers: req.Headers,
+		Vars: req.PathParameters,
 	}
 }
 

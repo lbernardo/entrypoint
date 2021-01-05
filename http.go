@@ -2,6 +2,7 @@ package entrypoint
 
 import (
 	"encoding/json"
+	"github.com/gorilla/mux"
 	"io/ioutil"
 	"net/http"
 )
@@ -15,12 +16,13 @@ func NewRequestByHttp(r *http.Request) Request {
 	return Request{
 		Body:    string(b),
 		Headers: headers,
+		Vars:    mux.Vars(r),
 	}
 }
 
-func NewResponseToHttp(w http.ResponseWriter, status int,  response Response) {
-	b,_  := json.Marshal(&response)
-	w.Header().Add("Content-type","application/json")
+func NewResponseToHttp(w http.ResponseWriter, status int, response Response) {
+	b, _ := json.Marshal(&response)
+	w.Header().Add("Content-type", "application/json")
 	w.WriteHeader(status)
 	if !response.Success {
 		w.WriteHeader(http.StatusBadRequest)
