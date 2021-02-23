@@ -7,7 +7,8 @@ type Request struct {
 }
 
 type Response struct {
-	Success bool        `json:"success"`
-	Data    interface{} `json:"data"`
-	Message string      `json:"message,omitempty"`
+	Success    bool        `json:"success"`
+	StatusCode int         `json:"status_code"`
+	Data       interface{} `json:"data"`
+	Message    string      `json:"message,omitempty"`
 }
